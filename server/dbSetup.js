@@ -13,4 +13,4 @@ connection.on('error',()=> console.log("connection failed"))
 
 connection.on('connected',()=> console.log("db connected"))
 
-module.exports=mongoose;
+module.exports=mongoose;   
