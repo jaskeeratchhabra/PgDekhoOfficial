@@ -5,9 +5,13 @@ const  app=express();
 
 const dbConfig=require('./dbSetup');
 
+const usersRoute=require("./routes/userRoute")
+
 const roomsRoute=require('./routes/roomsRoute')
 
 app.use(express.json());
+
+app.use('/api/users',usersRoute)
 app.use('/api/rooms',roomsRoute)
 
 const port= process.env.PORT || 5000;
