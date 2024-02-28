@@ -9,7 +9,11 @@ const usersRoute=require("./routes/userRoute")
 
 const roomsRoute=require('./routes/roomsRoute')
 
+const bookingRoute=require("./routes/bookingRoute");
+
 app.use(express.json());
+
+app.use('/api/book',bookingRoute)
 
 app.use('/api/users',usersRoute)
 app.use('/api/rooms',roomsRoute)
