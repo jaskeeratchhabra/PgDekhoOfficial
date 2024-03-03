@@ -6,8 +6,9 @@ function NavbarComponent() {
   const location = useLocation();
   const [darkTheme, setDarkTheme] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
-  const [userName, setUserName] = useState(JSON.parse(localStorage.getItem("username")));
+  // const userName = JSON.parse(localStorage.getItem("username"));
 
+  const userName="xyz"
   const handleDropdown = () => {
     setIsOpen(!isOpen);
   };

@@ -29,7 +29,7 @@ const LoginForm = () => {
       const result = (await axios.post("/api/users/login", user)).data;
       if (result) {
         setSuccess(true);
-        localStorage.setItem("username",JSON.stringify(result.name));
+        // localStorage.setItem("username",JSON.stringify(result.name));
       }
     } catch (error) {
       setError(error.message);

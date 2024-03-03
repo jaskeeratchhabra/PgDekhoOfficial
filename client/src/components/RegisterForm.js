@@ -4,6 +4,8 @@ import Loading from './Loading';
 import { useNavigate } from 'react-router-dom';
 import { EyeIcon,EyeOffIcon } from '@heroicons/react/solid';
 const RegisterForm = () => {
+
+  const navigate=useNavigate();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
   const [formData, setFormData] = useState({
@@ -32,6 +34,7 @@ const RegisterForm = () => {
       setLoading(true);
       const data = (await axios.post("/api/users/register", user)).data;
       alert("USer Registered SuccessFully")
+      navigate("/login");
       console.log(data);
     } catch (error) {
       console.log(error.message);
@@ -44,7 +47,7 @@ const RegisterForm = () => {
   };
 
   return (
-    <div className="flex justify-center items-center h-screen bg-gradient-to-br from-purple-600 to-pink-600">
+    <div className="flex justify-center items-center h-screen">
       {loading && <Loading />}
       <form className="bg-white shadow-lg rounded-lg p-8 max-w-md w-full" onSubmit={handleSubmit}>
         <h2 className="text-2xl font-semibold mb-4 text-center">Sign Up</h2>
