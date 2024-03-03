@@ -37,7 +37,8 @@ function BookingScreen() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [room, setRoom] = useState({});
-  
+  const [month,setMonths]=useState(0);
+
   useEffect(() => {
     async function fetchData() {
         try {
@@ -50,6 +51,7 @@ function BookingScreen() {
             
                 const totalRent = Math.ceil(daysInBookingPeriod/30)*room.rentperday;
                 
+                setMonths(Math.ceil(daysInBookingPeriod/30));
                 setAmount(totalRent);
             } 
 
@@ -63,7 +65,26 @@ function BookingScreen() {
     
     fetchData();
 }, [startDate, endDate, roomid]);
-
+   
+  async function bookRoom(e){
+    e.preventDefault()
+    const bookingDetails={
+      room:room.name,
+      roomid:room._id,
+      userid:JSON.parse(localStorage.getItem("user"))._id,
+      fromdate:startDate,
+      todate:endDate,
+      totalamount:Amount,
+      totalmonths:month,
+    }
+    try{
+       const result= (await axios.post("/api/book/bookroom",bookingDetails)).data;
+       console.log(result);
+    }
+    catch(error){
+      console.log(error);
+    }
+  }
 
 
   if (loading) {
@@ -124,7 +145,8 @@ function BookingScreen() {
             <p className='p-2'><span className='text-gray-900'>Total Amount: ₹</span><span className='text-green-500 text-lg'>{Amount}</span></p>
 
           </b>
-          <button className="absolute bottom-30  m-4 bg-blue-800 px-2 py-2 shadow-md rounded-lg text-white" type="submit">Pay Now</button>
+          <button className="absolute bottom-30  m-4 bg-blue-800 px-2 py-2 shadow-md rounded-lg text-white" type="submit" onClick={bookRoom}>
+           Pay Now</button>
         </div>
        </div> 
        </div>

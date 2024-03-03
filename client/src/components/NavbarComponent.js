@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Container, Nav, Navbar } from 'react-bootstrap';
 import { useLocation, Link } from 'react-router-dom';
 
@@ -6,9 +6,20 @@ function NavbarComponent() {
   const location = useLocation();
   const [darkTheme, setDarkTheme] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
-  // const userName = JSON.parse(localStorage.getItem("username"));
+  const [userName,setUsername]=useState("");
+  React.useEffect(()=>{
+    try{
+      if(JSON.parse(localStorage.getItem("user")))
+      {
+       setUsername(JSON.parse(localStorage.getItem("user").name))
+      }
+     }
+     catch(error){
+       console.log(error.message)
+     }
+  },[])
+  
 
-  const userName="xyz"
   const handleDropdown = () => {
     setIsOpen(!isOpen);
   };
