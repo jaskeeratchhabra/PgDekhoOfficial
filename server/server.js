@@ -13,6 +13,9 @@ const bookingRoute=require("./routes/bookingRoute");
 
 app.use(express.json());
 
+app.use("/",(req,res)=>{
+    res.send("server is running new");
+})
 app.use('/api/book',bookingRoute)
 
 app.use('/api/users',usersRoute)
